@@ -75,14 +75,15 @@ function FormWallet(prop) {
           placeholder="registrada a despesa"
           onChange={ (event) => setDinheiro(event.target.value) }
         >
-          {Object.entries(prop.currencies).map((grana, index) => (
-            <option
-              key={ index }
-              value={ grana[1].code }
-              data-testid="USD"
-            >
-              {grana[1].code}
-            </option>))}
+          {Object.entries(prop.currencies).filter((grana) => grana[0] !== 'USDT')
+            .map((grana, index) => (
+              <option
+                key={ index }
+                value={ grana[0] }
+                data-testid="USD"
+              >
+                {grana[1].code}
+              </option>))}
         </select>
       </label>
 
