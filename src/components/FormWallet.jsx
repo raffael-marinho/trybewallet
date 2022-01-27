@@ -10,7 +10,7 @@ function FormWallet(prop) {
   const [despesas, setDespesas] = useState(0);
   const [descriçao, setDescriçao] = useState('');
   // const [moeda, setMoeda] = useState({});
-  const [dinheiro, setDinheiro] = useState('');
+  const [dinheiro, setDinheiro] = useState('USD');
   const [pagamento, setPagamento] = useState(CartãoDeCrédito);
   const [tag, setTag] = useState(Alimentação);
 
@@ -30,7 +30,7 @@ function FormWallet(prop) {
     prop.enviaForm(payload);
     setDespesas(0);
     setDescriçao('');
-    setDinheiro('');
+    setDinheiro('USD');
     setPagamento(CartãoDeCrédito);
     setTag(Alimentação);
   };
