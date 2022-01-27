@@ -1,17 +1,16 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import FormWallet from '../components/FormWallet';
+import WalletHeader from '../components/WalletHeader';
 
-function Wallet(prop) {
-  const { email } = prop;
-  return (
-    <header>
-      <h1 data-testid="email-field">{email}</h1>
-      <h2 data-testid="total-field">0</h2>
-      <h2 data-testid="header-currency-field">BRL</h2>
-    </header>
-  );
+class Wallet extends React.Component {
+  render() {
+    return (
+      <div>
+        <WalletHeader />
+        <FormWallet />
+      </div>
+    );
+  }
 }
 
-const mapStateToProps = (state) => ({ email: state.user.email });
-
-export default connect(mapStateToProps, null)(Wallet);
+export default Wallet;

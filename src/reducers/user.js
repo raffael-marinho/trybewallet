@@ -1,5 +1,5 @@
 // Esse reducer será responsável por tratar as informações da pessoa usuária
-import { SOLICITA_EMAIL } from '../actions';
+import { SOLICITA_EMAIL } from '../actions/index';
 
 const loginState = {
   email: '',
