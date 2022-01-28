@@ -42,8 +42,7 @@ function FormWallet(prop) {
 
   useEffect(() => {
     chamaUseEffect();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  });
 
   return (
     <form action="" onSubmit={ btnDespesas }>
