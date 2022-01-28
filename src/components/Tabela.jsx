@@ -1,7 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { deleteButton, editButton } from '../actions';
 
 function Tabela(prop) {
+  const funcBtnExclui = (id) => {
+    prop.excluiBtn(id);
+  };
+
+  const funcBtnEdit = (id) => {
+    prop.excluiBtn(id);
+  };
+
   return (
     <div>
       <table border="1">
@@ -22,6 +31,7 @@ function Tabela(prop) {
           {prop.expenses.map((expense, index) => (
             <tr key={ index }>
               <td>{expense.description}</td>
+              {/* <td><input type="text" value={ expense.description } /></td> */}
               <td>{expense.tag}</td>
               <td>{expense.method}</td>
               <td>{expense.value}</td>
@@ -39,7 +49,23 @@ function Tabela(prop) {
 
               </td>
               <td>Real</td>
-              <td>Editar/Excluir</td>
+              <td>
+                <button
+                  onClick={ () => funcBtnEdit(expense.id) }
+                  type="button"
+                  data-testid="edit-btn"
+                >
+                  Editar
+                </button>
+
+                <button
+                  onClick={ () => funcBtnExclui(expense.id) }
+                  type="button"
+                  data-testid="delete-btn"
+                >
+                  Excluir
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
@@ -52,4 +78,9 @@ const mapStateToProps = (state) => ({
   expenses: state.wallet.expenses,
 });
 
-export default connect(mapStateToProps, null)(Tabela);
+const mapDispatchToProps = (dispatch) => ({
+  excluiBtn: (id) => dispatch(deleteButton(id)),
+  editBtn: (id) => dispatch(editButton(id)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Tabela);

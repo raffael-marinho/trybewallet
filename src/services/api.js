@@ -4,7 +4,7 @@ async function chamaApi() {
   const resposta = await fetch(url);
 
   const json = await resposta.json();
-  console.log(json);
+  // console.log(json);
   return json;
 }
 

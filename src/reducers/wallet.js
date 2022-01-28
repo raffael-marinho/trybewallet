@@ -1,5 +1,10 @@
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
-import { SALVAR_MOEDAS, SOLICITA_FORMWALLET } from '../actions';
+import {
+  SALVAR_MOEDAS,
+  SOLICITA_FORMWALLET,
+  DELETE_BTN,
+  EDIT_BTN,
+} from '../actions';
 
 const formWalletState = {
   expenses: [],
@@ -17,6 +22,23 @@ const wallet = (state = formWalletState, action) => {
     return {
       ...state,
       currencies: { ...action.moedas },
+    };
+  case DELETE_BTN:
+    // console.log(action.id);
+    // console.log(state.expenses);
+    return {
+      ...state,
+      expenses: state.expenses.filter((expense) => expense.id !== action.id),
+    };
+  case EDIT_BTN:
+    return {
+      ...state,
+      expenses: state.expenses.map((expense) => {
+        if (expense.id !== action.payload.id) {
+          return expense;
+        }
+        return { ...expense, ...action.payload };
+      }),
     };
   default:
     return state;

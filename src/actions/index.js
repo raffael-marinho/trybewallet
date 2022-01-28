@@ -27,3 +27,15 @@ export const actionSalvaApi = () => async (dispatch) => {
   const retornoApi = await chamaApi();
   dispatch(salvaMoedas(retornoApi));
 };
+
+export const DELETE_BTN = 'DELETE_BTN';
+export const deleteButton = (id) => ({
+  type: DELETE_BTN,
+  id,
+});
+
+export const EDIT_BTN = 'EDIT_BTN';
+export const editButton = (payload) => ({
+  type: EDIT_BTN,
+  payload,
+});
