@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { deleteButton, editButton } from '../actions';
-
+// a questao 8 foi feita com ajuda do Arthur Procopio
 function Tabela(prop) {
   const funcBtnExclui = (id) => {
     prop.excluiBtn(id);
@@ -28,8 +28,8 @@ function Tabela(prop) {
           </tr>
         </thead>
         <tbody>
-          {prop.expenses.map((expense, index) => (
-            <tr key={ index }>
+          {prop.expenses.map((expense) => (
+            <tr key={ expense.id }>
               <td>{expense.description}</td>
               {/* <td><input type="text" value={ expense.description } /></td> */}
               <td>{expense.tag}</td>
