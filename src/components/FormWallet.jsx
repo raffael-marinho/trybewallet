@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { actionSolicitaForm, salvaMoedas } from '../actions';
 import chamaApi from '../services/api';
 
@@ -35,14 +35,15 @@ function FormWallet(prop) {
     setTag(Alimentação);
   };
 
-  async function chamaUseEffect() {
-    const carregaApi = await chamaApi();
-    return prop.enviaMoeda(carregaApi);
-  }
+  const Dispatch = useDispatch();
 
   useEffect(() => {
+    async function chamaUseEffect() {
+      const carregaApi = await chamaApi();
+      return Dispatch(salvaMoedas(carregaApi));
+    }
     chamaUseEffect();
-  });
+  }, [Dispatch]);
 
   return (
     <form action="" onSubmit={ btnDespesas }>
