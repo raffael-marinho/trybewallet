@@ -7,8 +7,8 @@ function Tabela(prop) {
     prop.excluiBtn(id);
   };
 
-  const funcBtnEdit = (id) => {
-    prop.excluiBtn(id);
+  const funcBtnEdit = (expense) => {
+    prop.setPayload(expense);
   };
 
   return (
@@ -51,7 +51,7 @@ function Tabela(prop) {
               <td>Real</td>
               <td>
                 <button
-                  onClick={ () => funcBtnEdit(expense.id) }
+                  onClick={ () => funcBtnEdit(expense) }
                   type="button"
                   data-testid="edit-btn"
                 >

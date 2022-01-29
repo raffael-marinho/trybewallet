@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
-import { actionSolicitaForm, salvaMoedas } from '../actions';
+import { actionSolicitaForm, editButton, salvaMoedas } from '../actions';
 import chamaApi from '../services/api';
 
 function FormWallet(prop) {
@@ -9,7 +9,7 @@ function FormWallet(prop) {
 
   const [despesas, setDespesas] = useState(0);
   const [descriçao, setDescriçao] = useState('');
-  // const [moeda, setMoeda] = useState({});
+  // const [id, setId] = useState();
   const [dinheiro, setDinheiro] = useState('USD');
   const [pagamento, setPagamento] = useState(CartãoDeCrédito);
   const [tag, setTag] = useState(Alimentação);
@@ -17,7 +17,13 @@ function FormWallet(prop) {
   const btnDespesas = async (event) => {
     event.preventDefault();
     const exchangeRates = await chamaApi();
-    const id = prop.expenses.length;
+    // if (id === undefined) {
+    //   console.log(id);
+    //   setId(prop.expenses.length);
+    //   console.log(id);
+    // }
+    const id = prop?.payload?.id !== undefined ? prop?.payload?.id
+      : prop.expenses[prop.expenses.length - 1]?.id + 1 || 0;
     const payload = {
       value: despesas,
       description: descriçao,
@@ -27,15 +33,43 @@ function FormWallet(prop) {
       exchangeRates,
       id,
     };
-    prop.enviaForm(payload);
+    console.log(payload);
+    if (prop?.payload?.id !== undefined) {
+      prop.editForm(payload);
+    } else { prop.enviaForm(payload); }
     setDespesas(0);
     setDescriçao('');
     setDinheiro('USD');
     setPagamento(CartãoDeCrédito);
     setTag(Alimentação);
+    prop.setPayload(undefined);
+    // console.log(prop.setPayload);
   };
 
   const Dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   if (prop?.payload?.id) {
+  //     setId(prop?.payload?.id);
+  //   }
+  //   console.log(prop.payload);
+  // }, [prop.payload]);
+
+  useEffect(() => {
+    if (prop.payload) {
+      const {
+        value,
+        description,
+        currency,
+        method,
+      } = prop.payload;
+      setDespesas(value);
+      setDescriçao(description);
+      setDinheiro(currency);
+      setPagamento(method);
+      setTag(prop.payload.tag);
+    }
+  }, [prop.payload]);
 
   useEffect(() => {
     async function chamaUseEffect() {
@@ -75,15 +109,18 @@ function FormWallet(prop) {
           placeholder="registrada a despesa"
           onChange={ (event) => setDinheiro(event.target.value) }
         >
-          {Object.entries(prop.currencies).filter((grana) => grana[0] !== 'USDT')
-            .map((grana, index) => (
-              <option
-                key={ index }
-                value={ grana[0] }
-                data-testid="USD"
-              >
-                {grana[1].code}
-              </option>))}
+          {Object.keys(prop.currencies).filter((grana) => grana !== 'USDT')
+            .map((grana) => {
+              console.log(grana);
+              return (
+                <option
+                  key={ grana }
+                  value={ grana }
+                  data-testid="USD"
+                >
+                  {grana}
+                </option>);
+            })}
         </select>
       </label>
 
@@ -119,7 +156,12 @@ function FormWallet(prop) {
         </select>
       </label>
 
-      <button type="submit">Adicionar despesa</button>
+      <button type="submit">
+        {prop?.payload?.id !== undefined
+          ? 'Editar despesa'
+          : 'Adicionar despesa'}
+
+      </button>
     </form>
   );
 }
@@ -132,6 +174,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   enviaForm: (payload) => dispatch(actionSolicitaForm(payload)),
   enviaMoeda: (moedas) => dispatch(salvaMoedas(moedas)),
+  editForm: (payload) => dispatch(editButton(payload)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FormWallet);
