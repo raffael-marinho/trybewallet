@@ -8,7 +8,7 @@ import {
 
 const formWalletState = {
   expenses: [],
-  currencies: {},
+  currencies: [],
 };
 
 const wallet = (state = formWalletState, action) => {
@@ -21,7 +21,7 @@ const wallet = (state = formWalletState, action) => {
   case SALVAR_MOEDAS:
     return {
       ...state,
-      currencies: { ...action.moedas },
+      currencies: [...Object.keys(action.moedas)],
     };
   case DELETE_BTN:
     // console.log(action.id);

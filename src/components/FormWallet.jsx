@@ -109,7 +109,7 @@ function FormWallet(prop) {
           placeholder="registrada a despesa"
           onChange={ (event) => setDinheiro(event.target.value) }
         >
-          {Object.keys(prop.currencies).filter((grana) => grana !== 'USDT')
+          {(prop.currencies).filter((grana) => grana !== 'USDT')
             .map((grana) => {
               console.log(grana);
               return (
