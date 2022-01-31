@@ -16,7 +16,8 @@ function FormWallet(prop) {
 
   const btnDespesas = async (event) => {
     event.preventDefault();
-    const exchangeRates = await chamaApi();
+    const exchangeRates = prop?.payload?.id !== undefined ? prop?.payload?.exchangeRates
+      : await chamaApi();
     // if (id === undefined) {
     //   console.log(id);
     //   setId(prop.expenses.length);

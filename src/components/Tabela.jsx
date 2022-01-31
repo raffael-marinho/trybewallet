@@ -35,16 +35,15 @@ function Tabela(prop) {
               <td>{expense.tag}</td>
               <td>{expense.method}</td>
               <td>{expense.value}</td>
-              <td>{expense.exchangeRates[expense.currency].name}</td>
+              <td>{expense.exchangeRates[expense.currency].name.split('/')[0]}</td>
               <td>
-                {(Math.round(((Number(expense.exchangeRates[expense.currency].high)
-                  + Number(expense.exchangeRates[expense.currency].low)) / 2)
-                  * 100) / 100).toFixed(2)}
+                {(Math.round((Number(expense.exchangeRates[expense.currency].ask)
+                  + Number.EPSILON) * 100) / 100).toFixed(2)}
 
               </td>
               <td>
-                {((Math.floor(((Number(expense.exchangeRates[expense.currency].high)
-                  + Number(expense.exchangeRates[expense.currency].low)) / 2)
+                {((Math.floor(((Number(expense.exchangeRates[expense.currency].ask)
+                  + Number.EPSILON))
                   * 100 * (expense.value)) / 100)).toFixed(2)}
 
               </td>
