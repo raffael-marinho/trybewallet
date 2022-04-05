@@ -1,6 +1,6 @@
 # Projeto trybewallet
 
-## [Clique aqui](https://react-testing-library.vercel.app/) para acessar o App
+## [Clique aqui](https://trybewallet-steel.vercel.app/carteira) para acessar o App
 
 ## Descrição
 este app é uma carteira virtual, ela calcula seus gastos e regista suas compras de certa forma pode funcionar como controle de gastos.
@@ -23,7 +23,7 @@ Neste projeto, mostro que sou capaz de:
 ## Tecnologias Utilizadas:
 |HTML|CSS|JavaScript|ReactJS|
 |-|-|-|-|
-|![icon](./public/img/html.png)|![icon](./public/img/css.png)|![icon](./public/img/javascript.png)|![icon](./public/img/react.png)|
+|![icon](./public/icons/html.png)|![icon](./public/icons/css-3.png)|![icon](./public//icons/js.png)|![icon](./public/icons/react.png)|
 |Sintaxe JSX|Utilizado na estilização das páginas e dos componentes com styled components|Aplicação das funcionalidades com o Framework React|Recursos Utilizados: Function Components, React Router DOM, React Hooks|
 ___
 
@@ -33,4 +33,4 @@ ___
 
 - organizar para deixar mais didatico;
 
-![print](../../../../Downloads/picasion.com_6eed84f60fa3cc75909a8d3c8902287e.gif)
+![print](./public/icons/p.png)
