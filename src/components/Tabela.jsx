@@ -1,4 +1,5 @@
 import React from 'react';
+import '../style/Tabela.css';
 import { connect } from 'react-redux';
 import { deleteButton, editButton } from '../actions';
 // a questao 8 foi feita com ajuda do Arthur Procopio
@@ -12,8 +13,8 @@ function Tabela(prop) {
   };
 
   return (
-    <div>
-      <table border="1">
+    <div className="table">
+      <table border="1" className="border">
         <thead>
           <tr>
             <th>Descrição</th>
@@ -50,6 +51,7 @@ function Tabela(prop) {
               <td>Real</td>
               <td>
                 <button
+                  className="button"
                   onClick={ () => funcBtnEdit(expense) }
                   type="button"
                   data-testid="edit-btn"
@@ -58,6 +60,7 @@ function Tabela(prop) {
                 </button>
 
                 <button
+                  className="button"
                   onClick={ () => funcBtnExclui(expense.id) }
                   type="button"
                   data-testid="delete-btn"

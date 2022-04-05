@@ -1,4 +1,5 @@
 import React from 'react';
+import '../style/Header.css';
 import { connect } from 'react-redux';
 
 // requisito 9 consegui entender com ajuda do Vinicius Dionysio - Turma 13 - Tribo C e do Arthur Procópio;
@@ -6,17 +7,22 @@ import { connect } from 'react-redux';
 function WalletHeader(prop) {
   const { email, expenses } = prop;
   return (
-    <header>
-      <h1 data-testid="email-field">{email}</h1>
-      <h2 data-testid="total-field">
-        {(expenses.reduce(
-          (acc, cur) => acc + Number(cur.value
-            * ((Number(cur.exchangeRates[cur.currency].ask)))),
-          0,
-        )).toFixed(2)}
-
-      </h2>
-      <h2 data-testid="header-currency-field">BRL</h2>
+    <header className="header">
+      <h1 data-testid="email-field" className="color">{email}</h1>
+      <div className="money">
+        <div>
+          <h2 data-testid="total-field" className="color">
+            {(expenses.reduce(
+              (acc, cur) => acc + Number(cur.value
+                * ((Number(cur.exchangeRates[cur.currency].ask)))),
+              0,
+            )).toFixed(2)}
+          </h2>
+        </div>
+        <div>
+          <h2 data-testid="header-currency-field" className="color">BRL</h2>
+        </div>
+      </div>
     </header>
   );
 }

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import '../style/Formulario.css';
 import { connect, useDispatch } from 'react-redux';
 import { actionSolicitaForm, editButton, salvaMoedas } from '../actions';
 import chamaApi from '../services/api';
@@ -9,7 +10,6 @@ function FormWallet(prop) {
 
   const [despesas, setDespesas] = useState(0);
   const [descriçao, setDescriçao] = useState('');
-  // const [id, setId] = useState();
   const [dinheiro, setDinheiro] = useState('USD');
   const [pagamento, setPagamento] = useState(CartãoDeCrédito);
   const [tag, setTag] = useState(Alimentação);
@@ -18,11 +18,7 @@ function FormWallet(prop) {
     event.preventDefault();
     const exchangeRates = prop?.payload?.id !== undefined ? prop?.payload?.exchangeRates
       : await chamaApi();
-    // if (id === undefined) {
-    //   console.log(id);
-    //   setId(prop.expenses.length);
-    //   console.log(id);
-    // }
+
     const id = prop?.payload?.id !== undefined ? prop?.payload?.id
       : prop.expenses[prop.expenses.length - 1]?.id + 1 || 0;
     const payload = {
@@ -44,17 +40,9 @@ function FormWallet(prop) {
     setPagamento(CartãoDeCrédito);
     setTag(Alimentação);
     prop.setPayload(undefined);
-    // console.log(prop.setPayload);
   };
 
   const Dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   if (prop?.payload?.id) {
-  //     setId(prop?.payload?.id);
-  //   }
-  //   console.log(prop.payload);
-  // }, [prop.payload]);
 
   useEffect(() => {
     if (prop.payload) {
@@ -81,7 +69,7 @@ function FormWallet(prop) {
   }, [Dispatch]);
 
   return (
-    <form action="" onSubmit={ btnDespesas }>
+    <form action="" onSubmit={ btnDespesas } className="form">
 
       <input
         value={ despesas }
@@ -89,6 +77,7 @@ function FormWallet(prop) {
         data-testid="value-input"
         placeholder="valor da despesa"
         onChange={ (event) => setDespesas(event.target.value) }
+        className="value"
       />
 
       <textarea
@@ -97,7 +86,7 @@ function FormWallet(prop) {
         data-testid="description-input"
         placeholder="descrição da despesa"
         onChange={ (event) => setDescriçao(event.target.value) }
-
+        className="text"
       />
 
       <label htmlFor="moeda">
@@ -157,7 +146,7 @@ function FormWallet(prop) {
         </select>
       </label>
 
-      <button type="submit">
+      <button type="submit" className="button">
         {prop?.payload?.id !== undefined
           ? 'Editar despesa'
           : 'Adicionar despesa'}
