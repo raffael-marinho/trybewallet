@@ -1,6 +1,6 @@
 # Projeto trybewallet
 
-## [Clique aqui](https://trybewallet-steel.vercel.app/carteira) para acessar o App
+## [Clique aqui](https://trybewallet-steel.vercel.app/) para acessar o App
 
 ## Descrição
 este app é uma carteira virtual, ela calcula seus gastos e regista suas compras de certa forma pode funcionar como controle de gastos.
